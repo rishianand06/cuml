@@ -1,0 +1,38 @@
+# This is a basic workflow to help you get started with Actions
+
+name: scan
+
+# Controls when the action will run. 
+on:
+  # Triggers the workflow on push or pull request events but only for the main branch
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+
+  Pulse-Pull-Image:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-20.04
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      - name: Docker pull
+        run:  |
+          docker login quay.io -u nvidia+blossom_ro -p ${{ secrets.QUAY_RO_TOKEN }}
+          docker pull quay.io/nvidia/pulse:stable
+          docker images
+  
+  test-scan:
+    needs: [Pulse-Pull-Image]
+    runs-on: ubuntu-20.04
+    container:
+      image: quay.io/nvidia/pulse:rianandtest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Run pulse-cli command
+        run: pulse scan --help
+        env:
+          PULSE_URL: "https://nvidia-test.app.blackduck.com"
+          PULSE_API_TOKEN: ${{ secrets.BD_API_TOKEN }}
