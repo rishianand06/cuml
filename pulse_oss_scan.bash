@@ -7,5 +7,8 @@ touch environment.yml
 cd ../..
 export DETECT_CONDA_PATH=/usr/miniconda3/bin/conda
 export DETECT_CONDA_ENVIRONMENT_NAME=cudf_dev
-ls -l
-pulse --url https://nvidia-test.app.blackduck.com scan --vulnerability-report scanReport.json conda/environments/
+export DETECT_PROJECT_NAME=$PULSE_SCAN_PROJECT
+export DETECT_PROJECT_VERSIOn_NAME=$PULSE_SCAN_PROJECT_VERSION
+wget https://detect.synopsys.com/detect7.sh --no-check-certificate
+bash detect7.sh  --blackduck.url=https://nvidia-test.app.blackduck.com --blackduck.api.token=$PULSE_API_TOKEN --detect.source.path='conda/environments/'
+# pulse --url https://nvidia-test.app.blackduck.com --api-token $PULSE_API_TOKEN scan --vulnerability-report scanReport.json conda/environments/
