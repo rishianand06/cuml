@@ -7,4 +7,4 @@ cd ../..
 export DETECT_CONDA_PATH=/usr/miniconda3/bin/conda
 export DETECT_CONDA_ENVIRONMENT_NAME=cudf_dev
 ls -l
-pulse --url https://nvidia-test.app.blackduck.com --api-token ${PULSE_API_TOKEN} scan --project ${PULSE_SCAN_PROJECT} --project-version ${PULSE_SCAN_PROJECT_VERSION} --vulnerability-report scanReport.json conda/environments/
+pulse --url https://nvidia-test.app.blackduck.com scan --vulnerability-report scanReport.json conda/environments/
