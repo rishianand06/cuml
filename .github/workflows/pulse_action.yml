@@ -21,18 +21,21 @@ jobs:
       - name: Docker pull
         run:  |
           docker login quay.io -u nvidia+blossom_ro -p ${{ secrets.QUAY_RO_TOKEN }}
-          docker pull quay.io/nvidia/pulse:stable
+          docker pull quay.io/nvidia/pulse:condatest
           docker images
       - name: code checkout
         uses: actions/checkout@v2
       - name: Test Pulse image
         run: |
-          mkdir artifacts/
-          chmod o+w ./artifacts/
-          docker run --rm -i -v $GITHUB_WORKSPACE:/src/ -w /src/artifacts/ quay.io/nvidia/pulse:stable pulse --no-clean --log-level info --url https://nvidia-test.app.blackduck.com --api-token ${PULSE_API_TOKEN} scan --build --project ${PULSE_SCAN_PROJECT} --project-version ${PULSE_SCAN_PROJECT_VERSION} --vulnerability-report scanReport.json .
+          docker run --rm -i -v $GITHUB_WORKSPACE:/src -w /src quay.io/nvidia/pulse:condatest /bin/bash ./pulse_oss_scan.bash
           ls -l
         env:
           PULSE_API_TOKEN: ${{ secrets.BD_API_TOKEN }}
           PULSE_SCAN_PROJECT: "cuml-github-project"
           PULSE_SCAN_PROJECT_VERSION: "test"
+      - name: Upload scan reports in Artifacts
+        uses: actions/upload-artifact@v2
+        with: 
+          name: assets-for-download
+          path: scanReport.json
   
