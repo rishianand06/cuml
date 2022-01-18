@@ -27,7 +27,7 @@ jobs:
         uses: actions/checkout@v2
       - name: Test Pulse image
         run: |
-          docker run --rm -i --user root -v $GITHUB_WORKSPACE:/src -w /src quay.io/nvidia/pulse:condatest /bin/bash ./pulse_oss_scan.bash
+          docker run --rm -i --user root -v $GITHUB_WORKSPACE:/src -w /src -e PULSE_API_TOKEN=$PULSE_API_TOKEN -e PULSE_SCAN_PROJECT=$PULSE_SCAN_PROJECT -e PULSE_SCAN_PROJECT_VERSION=$PULSE_SCAN_PROJECT_VERSION quay.io/nvidia/pulse:condatest /bin/bash ./pulse_oss_scan.bash
           ls -l
         env:
           PULSE_API_TOKEN: ${{ secrets.BD_API_TOKEN }}
