@@ -1,5 +1,6 @@
 #!/bin/bash
 
+echo $PULSE_API_TOKEN
 /usr/miniconda3/bin/conda create -n cuml_dev python=3.7 cuml=22.02 cudatoolkit=11.2 -c conda-forge -c rapidsai-nightly -c nvidia -y
 cd conda/environments/ 
 touch environment.yml
