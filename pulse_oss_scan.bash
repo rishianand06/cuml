@@ -6,7 +6,7 @@ cd conda/environments/
 touch environment.yml
 cd ../..
 export DETECT_CONDA_PATH=/usr/miniconda3/bin/conda
-export DETECT_CONDA_ENVIRONMENT_NAME=cuml_dev
+# export DETECT_CONDA_ENVIRONMENT_NAME=cuml_dev
 export DETECT_PROJECT_NAME=$PULSE_SCAN_PROJECT
 export DETECT_PROJECT_VERSIOn_NAME=$PULSE_SCAN_PROJECT_VERSION
 wget https://detect.synopsys.com/detect7.sh --no-check-certificate
