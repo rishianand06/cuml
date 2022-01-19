@@ -2,6 +2,7 @@
 
 # /usr/miniconda3/bin/conda create -n cuml_dev python=3.7 cuml=22.02 cudatoolkit=11.2 -c conda-forge -c rapidsai-nightly -c nvidia -y
 cd conda/environments/
+/usr/miniconda3/bin/conda env create -n cuml_dev --file=cuml_dev_cuda11.5.yml
 mv cuml_dev_cuda11.5.yml environment.yml
 # touch environment.yml
 cd ../..
