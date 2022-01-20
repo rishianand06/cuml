@@ -8,7 +8,7 @@ mv conda/environments/cuml_dev_cuda11.5.yml environment.yml
 # cd ../..
 export DETECT_CONDA_PATH=/usr/miniconda3/bin/conda
 # export DETECT_CONDA_ENVIRONMENT_NAME=cuml_dev
-export DETECT_PROJECT_NAME=$PULSE_SCAN_PROJECT
+export DETECT_PROJECT_NAME=test-conda-env-repo
 export DETECT_PROJECT_VERSION_NAME=use_existing_env_file
 wget https://detect.synopsys.com/detect7.sh --no-check-certificate
 bash detect7.sh  --blackduck.url=https://nvidia-test.app.blackduck.com --blackduck.api.token=$PULSE_API_TOKEN --detect.source.path=.
