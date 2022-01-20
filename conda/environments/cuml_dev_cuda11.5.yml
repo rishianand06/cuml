@@ -23,6 +23,7 @@ dependencies:
 - umap-learn
 - scikit-learn=0.24
 - treelite=2.1.0
+- requests=2.25.1
 - statsmodels
 - seaborn
 - hdbscan
